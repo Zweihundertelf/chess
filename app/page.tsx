@@ -1,5 +1,8 @@
+import Board from "../components/board/Board";
+import "./global.scss";
+
 const IndexPage = () => {
-  return <p>CHESS APP</p>;
+  return <Board />;
 };
 
 export default IndexPage;

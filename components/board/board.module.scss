@@ -1,0 +1,66 @@
+$blackField: #461b04;
+$whiteField: #af8b58;
+
+.chessboard {
+  position: relative;
+  min-width: 500px;
+  min-height: 500px;
+  width: 20vw;
+  height: 20vw;
+  background-color: #6e482f;
+  border-radius: 8px;
+  user-select: none;
+  cursor: default;
+  overflow: hidden;
+
+  .descriptionWrapper {
+    font-family: "Poppins", sans-serif;
+    font-size: 1.2rem;
+    font-weight: bolder;
+    color: #e5e5e5;
+
+    & > div {
+      position: absolute;
+      display: grid;
+      padding: 10px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .descriptionVertical {
+      grid-template-rows: repeat(8, 1fr);
+      top: 10%;
+      flex-direction: column;
+      height: 80%;
+      width: 10%;
+    }
+    .descriptionHorizontal {
+      grid-template-columns: repeat(8, 1fr);
+      left: 10%;
+      flex-direction: row;
+      height: 10%;
+      width: 80%;
+    }
+  }
+}
+
+.board {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  width: 80%;
+  height: 80%;
+  border: 10px solid #3d231b;
+  border-radius: 4px;
+}
+
+.whiteField {
+  background-color: $whiteField;
+}
+.blackField {
+  background-color: $blackField;
+}
