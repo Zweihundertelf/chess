@@ -56,6 +56,12 @@ $whiteField: #af8b58;
   height: 80%;
   border: 10px solid #3d231b;
   border-radius: 4px;
+
+  & > div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .whiteField {

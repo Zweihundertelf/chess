@@ -1,3 +1,7 @@
+"use client";
+
+import { useState } from "react";
+import startPosition from "../utils/startPosition";
 import styles from "./board.module.scss";
 
 const vertical: string[] = ["1", "2", "3", "4", "5", "6", "7", "8"].reverse();
@@ -10,6 +14,8 @@ const renderDescription = (description: string[]) => {
 const getChessboardField = (fieldIndex: number) => (fieldIndex % 2 !== 0 ? styles.blackField : styles.whiteField);
 
 const Board = () => {
+  const [figures, setFigures] = useState(startPosition());
+
   return (
     <div className={styles.chessboard}>
       <div className={styles.descriptionWrapper}>
@@ -22,7 +28,11 @@ const Board = () => {
       </div>
       <div className={styles.board}>
         {vertical.map((_, v) =>
-          horizontal.map((_, h) => <div className={getChessboardField(v + h)} key={v + h * 8}></div>)
+          horizontal.map((_, h) => (
+            <div className={getChessboardField(v + h)} key={v + h * 8}>
+              {figures[v][h]?.player}
+            </div>
+          ))
         )}
       </div>
       <div className={styles.descriptionWrapper}>

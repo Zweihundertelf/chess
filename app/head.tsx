@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function Head() {
+const Head = () => {
   return (
     <React.Fragment>
       <title></title>
@@ -8,4 +8,6 @@ export default function Head() {
       <link rel="icon" href="/favicon.ico" />
     </React.Fragment>
   );
-}
+};
+
+export default Head;
