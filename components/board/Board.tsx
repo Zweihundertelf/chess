@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import startPosition from "../utils/startPosition";
 import styles from "./board.module.scss";
 
@@ -30,17 +31,17 @@ const Board = () => {
         {vertical.map((_, v) =>
           horizontal.map((_, h) => (
             <div className={getChessboardField(v + h)} key={v + h * 8}>
-              {figures[v][h]?.player}
+              <Image src={figures[v][h]?.image!} fill alt="no_piece" />
             </div>
           ))
         )}
       </div>
       <div className={styles.descriptionWrapper}>
         <div className={styles.descriptionHorizontal} style={{ top: 0 }}>
-          {renderDescription(vertical)}
+          {renderDescription(horizontal)}
         </div>
         <div className={styles.descriptionHorizontal} style={{ bottom: 0 }}>
-          {renderDescription(vertical)}
+          {renderDescription(horizontal)}
         </div>
       </div>
     </div>
