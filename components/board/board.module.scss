@@ -1,0 +1,50 @@
+$blackField: #461b04;
+$whiteField: #af8b58;
+
+.chessboard {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-rows: 1fr 6fr 1fr;
+  background-color: #6e482f;
+  border: 8px solid #3d231b;
+  border-radius: 10px;
+  aspect-ratio: 1 / 1;
+  user-select: none;
+  cursor: default;
+
+  .description {
+    display: grid;
+    place-items: center;
+    font-weight: bolder;
+    color: #e5e5e5;
+    font-size: larger;
+
+    &.descriptionVertical {
+      margin: 10px 0;
+      grid-row: 2;
+    }
+    &.descriptionHorizontal {
+      margin: 0 10px;
+      grid-column: 2;
+      grid-auto-flow: column;
+    }
+  }
+}
+
+.board {
+  position: relative;
+  display: grid;
+  grid-row: 2;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  border: 0.625rem solid #3d231b;
+  border-radius: 0.25rem;
+}
+
+.whiteField {
+  background-color: $whiteField;
+}
+.blackField {
+  background-color: $blackField;
+}

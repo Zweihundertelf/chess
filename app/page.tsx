@@ -1,5 +1,7 @@
+import Board from '../components/board/Board';
+
 const IndexPage = () => {
-  return <div>Index Page</div>;
+  return <Board width={35} />;
 };
 
 export default IndexPage;
