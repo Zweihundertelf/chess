@@ -1,6 +1,8 @@
 'use client';
-import React, { HTMLAttributes } from 'react';
+import React, { HTMLAttributes, useState } from 'react';
 
+import startPosition from '@components/utils/startPosition';
+import Image from 'next/image';
 import styles from './board.module.scss';
 
 const vertical: string[] = ['1', '2', '3', '4', '5', '6', '7', '8'].reverse();
@@ -17,13 +19,23 @@ interface BoardInterface extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Board = ({ width, ...props }: BoardInterface) => {
+  const [figures, setFigures] = useState(startPosition());
+
   return (
     <div {...props} className={[styles.chessboard, props.className].join(' ')} style={{ width: `${width}rem` }}>
       <React.Fragment>
         <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>
         <div className={[styles.description, styles.descriptionVertical].join(' ')}>{renderDescription(vertical)}</div>
       </React.Fragment>
-      <div className={styles.board}>{horizontal.map((_, h) => vertical.map((_, v) => <div className={getChessboardField(h + v)} key={h + v * 8}></div>))}</div>
+      <div className={styles.board}>
+        {horizontal.map((_, h) =>
+          vertical.map((_, v) => (
+            <div className={getChessboardField(h + v)} key={h + v * 8}>
+              {figures[h][v]?.image ? <Image src={figures[h][v]?.image!} fill alt="no_piece" /> : null}
+            </div>
+          ))
+        )}
+      </div>
       <React.Fragment>
         <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>
         <div className={[styles.description, styles.descriptionVertical].join(' ')}>{renderDescription(vertical)}</div>

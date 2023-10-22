@@ -40,6 +40,17 @@ $whiteField: #af8b58;
   grid-template-rows: repeat(8, 1fr);
   border: 0.625rem solid #3d231b;
   border-radius: 0.25rem;
+
+  & > div {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      cursor: pointer;
+    }
+  }
 }
 
 .whiteField {
