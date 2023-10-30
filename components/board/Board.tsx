@@ -1,7 +1,10 @@
 'use client';
 import React, { HTMLAttributes, useState } from 'react';
 
+import Piece from '@components/utils/Piece';
+import Player from '@components/utils/Player';
 import startPosition from '@components/utils/startPosition';
+import { BoardPosition } from '@components/utils/types';
 import Image from 'next/image';
 import styles from './board.module.scss';
 
@@ -13,6 +16,8 @@ const renderDescription = (description: string[]) => {
 };
 
 const getChessboardField = (fieldIndex: number) => (fieldIndex % 2 !== 0 ? styles.blackField : styles.whiteField);
+const isSelectedField = (fieldPosition: [number, number], selectedPosition: number[] | null) =>
+  selectedPosition !== null ? fieldPosition[0] === selectedPosition[0] && fieldPosition[1] === selectedPosition[1] : null;
 
 interface BoardInterface extends HTMLAttributes<HTMLDivElement> {
   width: number;
@@ -20,6 +25,13 @@ interface BoardInterface extends HTMLAttributes<HTMLDivElement> {
 
 const Board = ({ width, ...props }: BoardInterface) => {
   const [figures, setFigures] = useState(startPosition());
+  const [selectedPosition, setSelectedPosition] = useState<BoardPosition | null>(null);
+  const [activePlayer, setActivePlayer] = useState<Player>(Player.WHITE);
+
+  const handleClick = (x: number, y: number, selectedPiece: Piece | null) => {
+    if (selectedPosition && selectedPosition[0] === x && selectedPosition[1] === y) return setSelectedPosition(null);
+    if (selectedPiece && selectedPiece.player === activePlayer) return setSelectedPosition([x, y]);
+  };
 
   return (
     <div {...props} className={[styles.chessboard, props.className].join(' ')} style={{ width: `${width}rem` }}>
@@ -30,7 +42,7 @@ const Board = ({ width, ...props }: BoardInterface) => {
       <div className={styles.board}>
         {horizontal.map((_, h) =>
           vertical.map((_, v) => (
-            <div className={getChessboardField(h + v)} key={h + v * 8}>
+            <div className={isSelectedField([h, v], selectedPosition) ? styles.selected : getChessboardField(h + v)} onClick={() => handleClick(h, v, figures[h][v])} key={h + v * 8}>
               {figures[h][v]?.image ? <Image src={figures[h][v]?.image!} fill alt="no_piece" /> : null}
             </div>
           ))
