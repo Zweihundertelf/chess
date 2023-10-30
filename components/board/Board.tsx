@@ -31,6 +31,22 @@ const Board = ({ width, ...props }: BoardInterface) => {
   const handleClick = (x: number, y: number, selectedPiece: Piece | null) => {
     if (selectedPosition && selectedPosition[0] === x && selectedPosition[1] === y) return setSelectedPosition(null);
     if (selectedPiece && selectedPiece.player === activePlayer) return setSelectedPosition([x, y]);
+
+    if (!selectedPosition) return;
+
+    switchActivePlayer();
+    return movePiece(selectedPosition, [x, y]);
+  };
+
+  const movePiece = (startPosition: BoardPosition, endPosition: BoardPosition) => {
+    figures[endPosition[0]][endPosition[1]] = figures[startPosition[0]][startPosition[1]];
+    figures[startPosition[0]][startPosition[1]] = null;
+    setSelectedPosition(null);
+    setFigures(figures);
+  };
+
+  const switchActivePlayer = () => {
+    activePlayer === Player.WHITE ? setActivePlayer(Player.BLACK) : setActivePlayer(Player.WHITE);
   };
 
   return (
