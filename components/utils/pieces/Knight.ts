@@ -6,4 +6,8 @@ export default class Knight extends Piece {
     super(player);
     this.image = player === Player.WHITE ? 'https://upload.wikimedia.org/wikipedia/commons/7/70/Chess_nlt45.svg' : 'https://upload.wikimedia.org/wikipedia/commons/e/ef/Chess_ndt45.svg';
   }
+
+  movePossible(selectedPosition: [number, number], newPosition: [number, number], figures: (Piece | null)[][]): boolean {
+    return true;
+  }
 }

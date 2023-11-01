@@ -33,9 +33,10 @@ const Board = ({ width, ...props }: BoardInterface) => {
     if (selectedPiece && selectedPiece.player === activePlayer) return setSelectedPosition([x, y]);
 
     if (!selectedPosition) return;
+    if (!isMovePossible(selectedPosition, [x, y])) return;
 
     switchActivePlayer();
-    return movePiece(selectedPosition, [x, y]);
+    movePiece(selectedPosition, [x, y]);
   };
 
   const movePiece = (startPosition: BoardPosition, endPosition: BoardPosition) => {
@@ -43,6 +44,10 @@ const Board = ({ width, ...props }: BoardInterface) => {
     figures[startPosition[0]][startPosition[1]] = null;
     setSelectedPosition(null);
     setFigures(figures);
+  };
+
+  const isMovePossible = (activePosition: [number, number], newPosition: [number, number]) => {
+    if (figures[activePosition[0]][activePosition[1]]?.movePossible(activePosition, newPosition, figures)) return true;
   };
 
   const switchActivePlayer = () => {

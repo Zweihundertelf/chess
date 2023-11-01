@@ -6,4 +6,6 @@ export default abstract class Piece {
   constructor(public player: Player) {
     this.image = '';
   }
+
+  abstract movePossible(selectedPosition: [number, number], newPosition: [number, number], figures: (Piece | null)[][]): boolean;
 }

@@ -6,4 +6,8 @@ export default class King extends Piece {
     super(player);
     this.image = player === Player.WHITE ? 'https://upload.wikimedia.org/wikipedia/commons/4/42/Chess_klt45.svg' : 'https://upload.wikimedia.org/wikipedia/commons/f/f0/Chess_kdt45.svg';
   }
+
+  movePossible(selectedPosition: [number, number], newPosition: [number, number], figures: (Piece | null)[][]): boolean {
+    return true;
+  }
 }
