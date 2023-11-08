@@ -31,3 +31,9 @@ export const movePawn = (selectedPosition: [number, number], newPosition: [numbe
 
   return false;
 };
+
+export const moveRook = (selectedPosition: [number, number], newPosition: [number, number]): boolean => {
+  if (newPosition[0] === selectedPosition[0] || newPosition[1] === selectedPosition[1]) return true;
+
+  return false;
+};
