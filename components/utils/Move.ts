@@ -68,3 +68,19 @@ export const moveQueen = (selectedPosition: [number, number], newPosition: [numb
 
   return false;
 };
+
+export const moveKing = (selectedPosition: [number, number], newPosition: [number, number]): boolean => {
+  if (newPosition[0] === selectedPosition[0] && newPosition[1] === selectedPosition[1] - 1) return true;
+  if (newPosition[0] === selectedPosition[0] + 1 && newPosition[1] === selectedPosition[1]) return true;
+
+  if (newPosition[0] === selectedPosition[0] + 1 && newPosition[1] === selectedPosition[1] + 1) return true;
+  if (newPosition[0] === selectedPosition[0] + 1 && newPosition[1] === selectedPosition[1] - 1) return true;
+
+  if (newPosition[0] === selectedPosition[0] && newPosition[1] === selectedPosition[1] + 1) return true;
+  if (newPosition[0] === selectedPosition[0] - 1 && newPosition[1] === selectedPosition[1]) return true;
+
+  if (newPosition[0] === selectedPosition[0] - 1 && newPosition[1] === selectedPosition[1] + 1) return true;
+  if (newPosition[0] === selectedPosition[0] - 1 && newPosition[1] === selectedPosition[1] - 1) return true;
+
+  return false;
+};

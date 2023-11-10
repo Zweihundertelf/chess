@@ -1,3 +1,4 @@
+import { moveKing } from '@components/utils/Move';
 import Piece from '@components/utils/Piece';
 import Player from '@components/utils/Player';
 
@@ -8,6 +9,7 @@ export default class King extends Piece {
   }
 
   movePossible(selectedPosition: [number, number], newPosition: [number, number], figures: (Piece | null)[][]): boolean {
+    if (!moveKing(selectedPosition, newPosition)) return false;
     return true;
   }
 }
