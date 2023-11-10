@@ -58,3 +58,13 @@ export const moveBishop = (selectedPosition: [number, number], newPosition: [num
 
   return false;
 };
+
+export const moveQueen = (selectedPosition: [number, number], newPosition: [number, number]): boolean => {
+  if (newPosition[0] === selectedPosition[0] || newPosition[1] === selectedPosition[1]) return true;
+
+  if (selectedPosition[0] - newPosition[0] === selectedPosition[1] - newPosition[1]) return true;
+  if (selectedPosition[0] + selectedPosition[1] === newPosition[0] + newPosition[1]) return true;
+  if (selectedPosition[0] - newPosition[0] === selectedPosition[1] - newPosition[1]) return true;
+
+  return false;
+};
