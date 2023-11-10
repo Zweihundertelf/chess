@@ -1,3 +1,4 @@
+import { moveKnight } from '@components/utils/Move';
 import Piece from '@components/utils/Piece';
 import Player from '@components/utils/Player';
 
@@ -8,6 +9,8 @@ export default class Knight extends Piece {
   }
 
   movePossible(selectedPosition: [number, number], newPosition: [number, number], figures: (Piece | null)[][]): boolean {
+    if (!moveKnight(selectedPosition, newPosition)) return false;
+
     return true;
   }
 }

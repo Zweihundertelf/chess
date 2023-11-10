@@ -37,3 +37,16 @@ export const moveRook = (selectedPosition: [number, number], newPosition: [numbe
 
   return false;
 };
+
+export const moveKnight = (selectedPosition: [number, number], newPosition: [number, number]): boolean => {
+  if ((newPosition[0] === selectedPosition[0] + 2 && newPosition[1] === selectedPosition[1] - 1) || (newPosition[0] === selectedPosition[0] + 2 && newPosition[1] === selectedPosition[1] + 1))
+    return true;
+  if ((newPosition[0] === selectedPosition[0] - 2 && newPosition[1] === selectedPosition[1] - 1) || (newPosition[0] === selectedPosition[0] - 2 && newPosition[1] === selectedPosition[1] + 1))
+    return true;
+  if ((newPosition[0] === selectedPosition[0] + 1 && newPosition[1] === selectedPosition[1] - 2) || (newPosition[0] === selectedPosition[0] - 1 && newPosition[1] === selectedPosition[1] + 2))
+    return true;
+  if ((newPosition[0] === selectedPosition[0] + 1 && newPosition[1] === selectedPosition[1] + 2) || (newPosition[0] === selectedPosition[0] - 1 && newPosition[1] === selectedPosition[1] - 2))
+    return true;
+
+  return false;
+};
