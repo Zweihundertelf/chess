@@ -3,9 +3,11 @@ import React, { HTMLAttributes, useState } from 'react';
 
 import Piece from '@components/utils/Piece';
 import Player from '@components/utils/Player';
+import King from '@components/utils/pieces/King';
 import startPosition from '@components/utils/startPosition';
 import { BoardPosition } from '@components/utils/types';
 import Image from 'next/image';
+import toast, { Toaster } from 'react-hot-toast';
 import styles from './board.module.scss';
 
 const vertical: string[] = ['1', '2', '3', '4', '5', '6', '7', '8'].reverse();
@@ -33,7 +35,19 @@ const Board = ({ width, ...props }: BoardInterface) => {
     if (selectedPiece && selectedPiece.player === activePlayer) return setSelectedPosition([x, y]);
 
     if (!selectedPosition) return;
+
     if (!isMovePossible(selectedPosition, [x, y])) return;
+
+    if (figures[x][y] instanceof King) {
+      toast(`${activePlayer ? 'Black' : 'White'} wins`, {
+        icon: '🎉',
+        style: {
+          borderRadius: '10px',
+          background: '#333',
+          color: '#fff',
+        },
+      });
+    }
 
     switchActivePlayer();
     movePiece(selectedPosition, [x, y]);
@@ -56,6 +70,7 @@ const Board = ({ width, ...props }: BoardInterface) => {
 
   return (
     <div {...props} className={[styles.chessboard, props.className].join(' ')} style={{ width: `${width}rem` }}>
+      <Toaster position="top-center" />
       <React.Fragment>
         <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>
         <div className={[styles.description, styles.descriptionVertical].join(' ')}>{renderDescription(vertical)}</div>
