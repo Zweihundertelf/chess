@@ -28,7 +28,7 @@ interface BoardInterface extends HTMLAttributes<HTMLDivElement> {
 const Board = ({ width, ...props }: BoardInterface) => {
   const [figures, setFigures] = useState(startPosition());
   const [selectedPosition, setSelectedPosition] = useState<BoardPosition | null>(null);
-  const [activePlayer, setActivePlayer] = useState<Player>(Player.WHITE);
+  const [activePlayer, setActivePlayer] = useState<Player | null>(Player.WHITE);
 
   const handleClick = (x: number, y: number, selectedPiece: Piece | null) => {
     if (selectedPosition && selectedPosition[0] === x && selectedPosition[1] === y) return setSelectedPosition(null);
@@ -47,6 +47,9 @@ const Board = ({ width, ...props }: BoardInterface) => {
           color: '#fff',
         },
       });
+      setActivePlayer(null);
+      movePiece(selectedPosition, [x, y]);
+      return;
     }
 
     switchActivePlayer();
