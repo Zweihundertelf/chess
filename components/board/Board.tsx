@@ -21,11 +21,9 @@ const getChessboardField = (fieldIndex: number) => (fieldIndex % 2 !== 0 ? style
 const isSelectedField = (fieldPosition: [number, number], selectedPosition: number[] | null) =>
   selectedPosition !== null ? fieldPosition[0] === selectedPosition[0] && fieldPosition[1] === selectedPosition[1] : null;
 
-interface BoardInterface extends HTMLAttributes<HTMLDivElement> {
-  width: number;
-}
+type BoardInterface = HTMLAttributes<HTMLDivElement>;
 
-const Board = ({ width, ...props }: BoardInterface) => {
+const Board = ({ ...props }: BoardInterface) => {
   const [figures, setFigures] = useState(startPosition());
   const [selectedPosition, setSelectedPosition] = useState<BoardPosition | null>(null);
   const [activePlayer, setActivePlayer] = useState<Player | null>(Player.WHITE);
@@ -72,7 +70,7 @@ const Board = ({ width, ...props }: BoardInterface) => {
   };
 
   return (
-    <div {...props} className={[styles.chessboard, props.className].join(' ')} style={{ width: `${width}rem` }}>
+    <div {...props} className={[styles.chessboard, props.className].join(' ')}>
       <Toaster position="top-center" />
       <React.Fragment>
         <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>

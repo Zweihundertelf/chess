@@ -3,6 +3,8 @@ $whiteField: #af8b58;
 
 .chessboard {
   position: relative;
+  margin: 0 auto;
+  width: min(max(375px, 100%), 600px);
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
   grid-template-rows: 1fr 6fr 1fr;
