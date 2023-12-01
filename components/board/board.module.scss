@@ -1,9 +1,22 @@
 $blackField: #461b04;
 $whiteField: #af8b58;
 
+.option {
+  position: absolute;
+  bottom: 0.9375rem;
+  left: 1.5625rem;
+
+  button {
+    all: unset;
+    cursor: pointer;
+    width: 2.5rem;
+    aspect-ratio: 1 / 1;
+  }
+}
+
 .chessboard {
   position: relative;
-  margin: 0 auto;
+  margin: 6.25rem auto;
   width: min(max(375px, 100%), 600px);
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;

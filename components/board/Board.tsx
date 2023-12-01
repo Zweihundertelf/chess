@@ -54,6 +54,12 @@ const Board = ({ ...props }: BoardInterface) => {
     movePiece(selectedPosition, [x, y]);
   };
 
+  const handleReset = () => {
+    setFigures(startPosition());
+    setSelectedPosition(null);
+    setActivePlayer(Player.WHITE);
+  };
+
   const movePiece = (startPosition: BoardPosition, endPosition: BoardPosition) => {
     figures[endPosition[0]][endPosition[1]] = figures[startPosition[0]][startPosition[1]];
     figures[startPosition[0]][startPosition[1]] = null;
@@ -70,26 +76,38 @@ const Board = ({ ...props }: BoardInterface) => {
   };
 
   return (
-    <div {...props} className={[styles.chessboard, props.className].join(' ')}>
-      <Toaster position="top-center" />
-      <React.Fragment>
-        <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>
-        <div className={[styles.description, styles.descriptionVertical].join(' ')}>{renderDescription(vertical)}</div>
-      </React.Fragment>
-      <div className={styles.board}>
-        {horizontal.map((_, h) =>
-          vertical.map((_, v) => (
-            <div className={isSelectedField([h, v], selectedPosition) ? styles.selected : getChessboardField(h + v)} onClick={() => handleClick(h, v, figures[h][v])} key={h + v * 8}>
-              {figures[h][v]?.image ? <Image src={figures[h][v]?.image!} fill alt="no_piece" /> : null}
-            </div>
-          ))
-        )}
+    <React.Fragment>
+      {activePlayer === null ? (
+        <div className={styles.option}>
+          <button onClick={handleReset}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+          </button>
+        </div>
+      ) : null}
+      <div {...props} className={[styles.chessboard, props.className].join(' ')}>
+        <Toaster position="top-center" />
+        <React.Fragment>
+          <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>
+          <div className={[styles.description, styles.descriptionVertical].join(' ')}>{renderDescription(vertical)}</div>
+        </React.Fragment>
+        <div className={styles.board}>
+          {horizontal.map((_, h) =>
+            vertical.map((_, v) => (
+              <div className={isSelectedField([h, v], selectedPosition) ? styles.selected : getChessboardField(h + v)} onClick={() => handleClick(h, v, figures[h][v])} key={h + v * 8}>
+                {figures[h][v]?.image ? <Image src={figures[h][v]?.image!} fill alt="no_piece" /> : null}
+              </div>
+            ))
+          )}
+        </div>
+        <React.Fragment>
+          <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>
+          <div className={[styles.description, styles.descriptionVertical].join(' ')}>{renderDescription(vertical)}</div>
+        </React.Fragment>
       </div>
-      <React.Fragment>
-        <div className={[styles.description, styles.descriptionHorizontal].join(' ')}>{renderDescription(horizontal)}</div>
-        <div className={[styles.description, styles.descriptionVertical].join(' ')}>{renderDescription(vertical)}</div>
-      </React.Fragment>
-    </div>
+    </React.Fragment>
   );
 };
 
